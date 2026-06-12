@@ -7,12 +7,13 @@
     <!-- Tailwind CSS para un diseño moderno y rápido -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* Base inspirada en los tonos industriales y metálicos de la estructura */
+        /* Base oscura inspirada en la estructura metálica de la lona */
         body {
             background-color: #1A1F26;
         }
-        /* Carga la imagen 1000483744.png como fondo completo de la bienvenida */
+        /* Carga la imagen de fondo con un respaldo sólido por si tarda en conectar */
         .bg-lona-principal {
+            background-color: #111622;
             background-image: url('1000483744.png');
             background-size: cover;
             background-position: center;
@@ -22,23 +23,26 @@
 </head>
 <body class="text-gray-900 font-sans min-h-screen flex flex-col justify-between">
 
-    <!-- ================= PANTALLA DE INICIO (HOME CON TU IMAGEN 1000483744.png) ================= -->
-    <div id="pantallaInicio" class="fixed inset-0 bg-lona-principal z-50 flex flex-col justify-end items-center p-6 pb-12 transition-opacity duration-500">
-        <!-- Degradado sutil para asegurar legibilidad perfecta en la zona del botón -->
-        <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent -z-10"></div>
+    <!-- ================= PANTALLA DE INICIO (CORREGIDA Y CENTRADA) ================= -->
+    <div id="pantallaInicio" class="fixed inset-0 bg-lona-principal z-50 flex flex-col justify-between items-center p-6 pt-16 pb-16 transition-opacity duration-500">
+        <!-- Espaciador superior para empujar el botón abajo de forma limpia si la imagen existe -->
+        <div></div>
         
-        <!-- Botón estilizado basado en el amarillo de la lona -->
-        <div class="w-full max-w-sm px-4">
+        <!-- Degradado sutil para asegurar legibilidad en la zona baja -->
+        <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent -z-10"></div>
+        
+        <!-- Botón estilizado basado en el amarillo de alto contraste de tu lona -->
+        <div class="w-full max-w-sm px-4 z-10">
             <button type="button" id="btnIngresar" class="w-full bg-[#FFDE00] text-black font-black text-xl py-4 px-6 rounded-xl cursor-pointer transition-all uppercase tracking-wider shadow-2xl hover:bg-[#E6C800] active:scale-95 border border-black/10">
                 Empezar a Cotizar
             </button>
         </div>
     </div>
 
-    <!-- ================= SECCIÓN DEL COTIZADOR (NUEVA PALETA DE ALTO CONTRASTE) ================= -->
+    <!-- ================= SECCIÓN DEL COTIZADOR ================= -->
     <div id="contenidoPrincipal" class="hidden flex-grow flex flex-col justify-between min-h-screen">
         
-        <!-- Encabezado / Navbar que emula los bloques de la marca -->
+        <!-- Encabezado / Navbar -->
         <header class="bg-black text-white p-4 sticky top-0 z-40 border-b-4 border-[#FFDE00]">
             <div class="max-w-4xl mx-auto flex justify-between items-center">
                 <h1 class="text-2xl font-black tracking-widest text-white">LONAS <span class="text-[#FFDE00]">VIN</span></h1>
@@ -49,7 +53,7 @@
         <!-- Contenido Principal -->
         <main class="max-w-xl mx-auto p-4 w-full flex-grow flex flex-col justify-center my-6">
             
-            <!-- Tarjeta del Cotizador en blanco para un contraste nítido y limpio -->
+            <!-- Tarjeta del Cotizador -->
             <div class="bg-white border-2 border-gray-300 rounded-2xl p-6 shadow-2xl">
                 <h2 class="text-3xl font-black mb-1 text-center text-black uppercase tracking-tight">Configura tu Lona</h2>
                 <p class="text-gray-600 text-sm text-center mb-6 font-medium">Uso rudo con excelente calidad y garantía.</p>
@@ -103,13 +107,13 @@
                         </div>
                     </div>
 
-                    <!-- Caja de Precio Estimado (Bloque Amarillo de Alto Impacto) -->
+                    <!-- Caja de Precio Estimado -->
                     <div class="bg-[#FFDE00] border-2 border-black p-4 rounded-xl text-center shadow-md">
                         <span class="text-xs font-black uppercase tracking-widest text-black block mb-1">Precio Total Estimado</span>
                         <span class="text-3xl font-black text-black" id="precioFinal">$120.00 MXN</span>
                     </div>
 
-                    <!-- Botón de WhatsApp Integrado -->
+                    <!-- Botón de WhatsApp -->
                     <button type="button" id="btnWhatsapp" class="w-full bg-black hover:bg-gray-900 text-[#FFDE00] font-black text-lg py-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all uppercase tracking-wider shadow-lg active:scale-95">
                         <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.717-1.456L0 24zm6.59-4.846c1.66.986 3.288 1.479 4.884 1.479 5.277 0 9.585-4.307 9.588-9.593.002-2.546-.988-4.941-2.79-6.742-1.804-1.802-4.194-2.795-6.737-2.796-5.281 0-9.591 4.31-9.595 9.597-.001 1.706.469 3.313 1.359 4.717L2.172 21.8l4.475-1.646zm11.196-4.634c-.29-.146-1.72-.85-1.985-.946-.266-.097-.46-.146-.653.146-.193.291-.748.946-.918 1.14-.17.194-.34.218-.63.073-.29-.146-1.227-.452-2.337-1.443-.864-.771-1.447-1.723-1.616-2.015-.17-.291-.018-.448.127-.592.131-.13.291-.34.436-.509.145-.17.193-.291.29-.485.097-.194.049-.364-.024-.509-.073-.146-.653-1.577-.894-2.16-.235-.565-.475-.489-.653-.497-.168-.008-.363-.01-.559-.01-.195 0-.515.073-.785.364-.269.292-1.026 1.002-1.026 2.442 0 1.44 1.047 2.839 1.193 3.033.145.194 2.06 3.146 4.99 4.414.697.302 1.242.483 1.665.617.701.223 1.34.191 1.844.115.562-.085 1.72-.703 1.961-1.383.243-.68.243-1.261.17-1.383-.074-.122-.269-.219-.559-.365z"/></svg>
                         Enviar pedido por WhatsApp
@@ -124,7 +128,7 @@
         </footer>
     </div>
 
-    <!-- Lógica JavaScript -->
+    <!-- Lógica JavaScript Corregida -->
     <script>
         const PRECIO_M2 = 120; 
         const TEL_WHATSAPP = "522225673684"; 
@@ -168,7 +172,8 @@
             input.addEventListener('input', calcularPrecio);
         });
 
-        fn calcularPrecio() {
+        // REPARADO: Se corrigió la declaración de la función para que no rompa el script
+        function calcularPrecio() {
             const ancho = parseFloat(anchoLona.value) || 0;
             const largo = parseFloat(largoLona.value) || 0;
             const area = ancho * largo;
