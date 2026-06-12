@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cenit Digital Studio - Lonas Publicitarias</title>
+    <!-- Tailwind CSS para un diseño moderno y rápido -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Estilos personalizados para asegurar el alto contraste */
+        body {
+            background-color: #0B0F19;
+        }
+    </style>
+</head>
+<body class="text-white font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Encabezado / Navbar -->
+    <header class="border-b border-gray-800 bg-[#111827] p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-black tracking-wider text-[#10B981]">CENIT DIGITAL STUDIO</h1>
+            <span class="text-xs bg-gray-800 text-gray-400 px-2 py-1 rounded border border-gray-700">Cotizador Pro v1.0</span>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-xl mx-auto p-4 w-full flex-grow flex flex-col justify-center my-6">
+        
+        <!-- Tarjeta del Cotizador -->
+        <div class="bg-[#1F2937] border-2 border-gray-800 rounded-2xl p-6 shadow-2xl">
+            <h2 class="text-2xl font-bold mb-2 text-center text-white">Configura tu Lona</h2>
+            <p class="text-gray-400 text-sm text-center mb-6">Calcula el costo estimado e inicia tu pedido al instante.</p>
+
+            <form id="cotizadorForm" class="space-y-5">
+                
+                <!-- Selector de Color -->
+                <div>
+                    <label class="block text-sm font-bold uppercase tracking-wide text-gray-300 mb-2">Color de Fondo</label>
+                    <select id="colorLona" class="w-full bg-[#0B0F19] border-2 border-gray-700 rounded-xl p-3 text-white font-medium focus:border-[#10B981] focus:outline-none transition-colors">
+                        <option value="Blanco">Blanco</option>
+                        <option value="Amarillo">Amarillo</option>
+                        <option value="Rojo">Rojo</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Azul">Azul</option>
+                    </select>
+                </div>
+
+                <!-- Medidas (Largo y Ancho) -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold uppercase tracking-wide text-gray-300 mb-2">Ancho (metros)</label>
+                        <input type="number" id="anchoLona" min="0.5" step="0.1" value="1.0" class="w-full bg-[#0B0F19] border-2 border-gray-700 rounded-xl p-3 text-white font-medium focus:border-[#10B981] focus:outline-none text-center">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold uppercase tracking-wide text-gray-300 mb-2">Largo (metros)</label>
+                        <input type="number" id="largoLona" min="0.5" step="0.1" value="1.0" class="w-full bg-[#0B0F19] border-2 border-gray-700 rounded-xl p-3 text-white font-medium focus:border-[#10B981] focus:outline-none text-center">
+                    </div>
+                </div>
+
+                <!-- Pregunta de Argollas (Ojillos) -->
+                <div class="bg-[#111827] p-4 rounded-xl border border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold uppercase tracking-wide text-gray-300">¿Necesita argollas?</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="necesitaArgollas" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#10B981]"></div>
+                        </label>
+                    </div>
+
+                    <!-- Campos Dinámicos de Argollas (Ocultos por defecto) -->
+                    <div id="seccionArgollas" class="hidden mt-4 pt-4 border-t border-gray-800 grid grid-cols-2 gap-4 transition-all">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1">En el Ancho (Ctd.)</label>
+                            <input type="number" id="argollasAncho" min="0" value="0" class="w-full bg-[#0B0F19] border border-gray-600 rounded-lg p-2 text-white text-center">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1">En el Largo (Ctd.)</label>
+                            <input type="number" id="argollasLargo" min="0" value="0" class="w-full bg-[#0B0F19] border border-gray-600 rounded-lg p-2 text-white text-center">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caja de Precio Estimado -->
+                <div class="bg-[#111827] border border-gray-800 p-4 rounded-xl text-center">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Precio Total Estimado</span>
+                    <span class="text-3xl font-black text-[#10B981]" id="precioFinal">$120.00 MXN</span>
+                </div>
+
+                <!-- Botón de WhatsApp -->
+                <button type="button" id="btnWhatsapp" class="w-full bg-[#10B981] hover:bg-[#0F9F6E] text-[#0B0F19] font-black text-lg py-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all uppercase tracking-wider shadow-lg shadow-[#10B981]/20">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.717-1.456L0 24zm6.59-4.846c1.66.986 3.288 1.479 4.884 1.479 5.277 0 9.585-4.307 9.588-9.593.002-2.546-.988-4.941-2.79-6.742-1.804-1.802-4.194-2.795-6.737-2.796-5.281 0-9.591 4.31-9.595 9.597-.001 1.706.469 3.313 1.359 4.717L2.172 21.8l4.475-1.646zm11.196-4.634c-.29-.146-1.72-.85-1.985-.946-.266-.097-.46-.146-.653.146-.193.291-.748.946-.918 1.14-.17.194-.34.218-.63.073-.29-.146-1.227-.452-2.337-1.443-.864-.771-1.447-1.723-1.616-2.015-.17-.291-.018-.448.127-.592.131-.13.291-.34.436-.509.145-.17.193-.291.29-.485.097-.194.049-.364-.024-.509-.073-.146-.653-1.577-.894-2.16-.235-.565-.475-.489-.653-.497-.168-.008-.363-.01-.559-.01-.195 0-.515.073-.785.364-.269.292-1.026 1.002-1.026 2.442 0 1.44 1.047 2.839 1.193 3.033.145.194 2.06 3.146 4.99 4.414.697.302 1.242.483 1.665.617.701.223 1.34.191 1.844.115.562-.085 1.72-.703 1.961-1.383.243-.68.243-1.261.17-1.383-.074-.122-.269-.219-.559-.365z"/></svg>
+                    Enviar pedido por WhatsApp
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center p-4 text-gray-600 text-xs border-t border-gray-900 bg-[#0B0F19]">
+        &copy; 2026 Cenit Digital Studio. Todos los derechos reservados.
+    </footer>
+
+    <!-- Lógica del Cotizador en JavaScript -->
+    <script>
+        const PRECIO_M2 = 120; // Precio base por metro cuadrado en MXN
+        const TEL_WHATSAPP = "522225673684"; // Tu número de atención
+
+        // Elementos del DOM
+        const form = document.getElementById('cotizadorForm');
+        const colorLona = document.getElementById('colorLona');
+        const anchoLona = document.getElementById('anchoLona');
+        const largoLona = document.getElementById('largoLona');
+        const necesitaArgollas = document.getElementById('necesitaArgollas');
+        const seccionArgollas = document.getElementById('seccionArgollas');
+        const argollasAncho = document.getElementById('argollasAncho');
+        const argollasLargo = document.getElementById('argollasLargo');
+        const precioFinalEl = document.getElementById('precioFinal');
+        const btnWhatsapp = document.getElementById('btnWhatsapp');
+
+        // Mostrar u ocultar campos de argollas
+        necesitaArgollas.addEventListener('change', () => {
+            if (necesitaArgollas.checked) {
+                seccionArgollas.classList.remove('hidden');
+            } else {
+                seccionArgollas.classList.add('hidden');
+                argollasAncho.value = 0;
+                argollasLargo.value = 0;
+            }
+            calcularPrecio();
+        });
+
+        // Escuchar cambios en los inputs para actualizar el precio vivo
+        [colorLona, anchoLona, largoLona, argollasAncho, argollasLargo].forEach(input => {
+            input.addEventListener('input', calcularPrecio);
+        });
+
+        function calcularPrecio() {
+            const ancho = parseFloat(anchoLona.value) || 0;
+            const largo = parseFloat(largoLona.value) || 0;
+            
+            // Cálculo del área
+            const area = ancho * largo;
+            let total = area * PRECIO_M2;
+
+            // Las argollas las puedes cobrar extra si quieres, en este caso las agregamos al reporte.
+            // Si quieres cobrarlas, puedes sumar por ejemplo: total += (numArgollas * 5);
+            
+            // Mostrar en pantalla formateado
+            precioFinalEl.textContent = `$${total.toFixed(2)} MXN`;
+            return total;
+        }
+
+        // Evento para enviar a WhatsApp
+        btnWhatsapp.addEventListener('click', () => {
+            const color = colorLona.value;
+            const ancho = anchoLona.value;
+            const largo = largoLona.value;
+            const precio = precioFinalEl.textContent;
+            
+            let detalleArgollas = "No requiere";
+            if (necesitaArgollas.checked) {
+                detalleArgollas = `Sí (${argollasAncho.value} en el ancho y ${argollasLargo.value} en el largo)`;
+            }
+
+            // Construir el mensaje de texto estructurado y limpio
+            const mensaje = `¡Hola *Cenit Digital Studio*! 👋%0A` +
+                            `Me gustaría cotizar/ordenar una lona con las siguientes especificaciones:%0A%0A` +
+                            `🎨 *Color de fondo:* ${color}%0A` +
+                            `📏 *Medidas:* ${ancho}m de ancho x ${largo}m de largo%0A` +
+                            `🔘 *Argollas:* ${detalleArgollas}%0A%0A` +
+                            `💰 *Precio estimado:* ${precio}%0A%0A` +
+                            `Quedo atento para confirmar el diseño y el pago.`;
+
+            // Crear el enlace directo
+            const urlWhatsapp = `https://wa.me/${TEL_WHATSAPP}?text=${mensaje}`;
+            
+            // Abrir en pestaña nueva
+            window.open(urlWhatsapp, '_blank');
+        });
+
+        // Ejecutar cálculo inicial al cargar
+        calcularPrecio();
+    </script>
+</body>
+</html>
